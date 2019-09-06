@@ -159,9 +159,9 @@ void loop() {
   if (client.connected() && trigger_is_pulled && gun_is_pulled_out && (millis() - cooldown_timer) > 1000) {
     client.println(message);//sending data
     digitalWrite(12, HIGH);//turning on the solenoid
-    solenoid_timer = cooldown_timer = millis();
+    cooldown_timer = millis();
   }
-  if(micros() - solenoid_timer > 40){
+  if(millis() - cooldown_timer > 40){
     digitalWrite(12, LOW);//turning off the solenoid
     }
 }
